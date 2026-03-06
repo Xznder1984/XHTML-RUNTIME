@@ -1,0 +1,8 @@
+{
+    "packages": {
+        "example-package": {
+            "versions": ["1.0.0"],
+            "url": "https://example.com/packages/example-package-1.0.0.zip"
+        }
+    }
+}
