@@ -1,0 +1,50 @@
+{
+  "name": "xhtml-runtime",
+  "version": "1.0.0",
+  "description": "A custom HTML runtime with support for Lua.",
+  "main": "src/core/runtime.js",
+  "bin": {
+    "xhtml": "cli.js"
+  },
+  "scripts": {
+    "start": "node cli.js dev",
+    "build": "node cli.js build",
+    "electron": "node cli.js electron",
+    "package": "electron-builder"
+  },
+  "keywords": [
+    "html",
+    "lua",
+    "runtime"
+  ],
+  "author": "Xznder1984",
+  "license": "MIT",
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "chalk": "^4.1.2",
+    "chokidar": "^3.6.0",
+    "commander": "^12.1.0",
+    "electron": "^31.0.2",
+    "electron-builder": "^24.13.3",
+    "express": "^4.19.2",
+    "fengari-web": "^0.1.4",
+    "node-notifier": "^10.0.1"
+  },
+  "build": {
+    "appId": "com.example.xhtml-runtime-app",
+    "productName": "XHTML Runtime App",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "src/electron/main.js"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

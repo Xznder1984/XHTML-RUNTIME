@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XHTML Runtime - A Modern Web & Desktop Framework</title>
+    <style>
+        :root {
+            --bg-color: #111;
+            --surface-color: #1a1a1a;
+            --primary-color: #00aaff;
+            --text-color: #e0e0e0;
+            --subtle-text: #888;
+            --border-color: #333;
+            --font-mono: 'SF Mono', 'Consolas', 'Menlo', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-sans);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        header, section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header {
+            text-align: center;
+            padding-top: 6rem;
+            border-bottom: none;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        header h1 span { color: var(--primary-color); }
+        header p {
+            font-size: 1.2rem;
+            color: var(--subtle-text);
+            margin-bottom: 2rem;
+        }
+        
+        .install-code {
+            font-family: var(--font-mono);
+            background-color: var(--surface-color);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        .feature-card h3 { font-size: 1.5rem; margin-top: 0; }
+        .feature-card p { color: #bbb; }
+
+        pre {
+            background-color: #222;
+            color: #eee;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            border: 1px solid var(--border-color);
+        }
+
+        .interactive-demo {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .interactive-demo input {
+            background: #333;
+            border: 1px solid #555;
+            color: var(--text-color);
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            width: 50%;
+        }
+        .interactive-demo button {
+            background: var(--primary-color);
+            border: none;
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+        .interactive-demo h3 {
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>XHTML<span>/</span>Runtime</h1>
+        <p>The niche framework for building reactive web and desktop apps with HTML and Lua.</p>
+        <pre class="install-code"># Install on Windows, Linux, or macOS
+iex (irm https://raw.githubusercontent.com/Xznder1984/XHTML-RUNTIME/main/src/installers/install.ps1)</pre>
+    </header>
+
+    <main>
+        <section id="features">
+            <h2>Core Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card"><h3>Reactive Data-Binding</h3><p>Link Lua variables to your HTML with `x-text` and `x-model` for effortless UI updates.</p></div>
+                <div class="feature-card"><h3>Full DOM Access</h3><p>A simple `xhtml.dom` API lets you select, create, and manipulate any element on the page.</p></div>
+                <div class="feature-card"><h3>OS & Filesystem Bridge</h3><p>Read local files and send native desktop notifications directly from your Lua scripts.</p></div>
+            </div>
+        </section>
+
+        <section id="demo">
+            <h2>Live Demo</h2>
+            <div class="interactive-demo">
+                <input type="text" x-model="name" placeholder="Type your name here...">
+                <h3>Hello, <span x-text="name">World</span>!</h3>
+                <button id="notifyBtn">Send Notification</button>
+            </div>
+        </section>
+        
+        <section id="guide">
+            <h2>Getting Started</h2>
+            <p>Here's how to create and run your first XHTML Runtime application.</p>
+            <h3>1. Initialize Project</h3>
+            <pre># Create a new folder and run:
+xhtml init</pre>
+            <h3>2. Write Some Code</h3>
+            <p>Open `index.xhtml` and add the following:</p>
+            <pre>
+&lt;!-- index.xhtml --&gt;
+&lt;h1&gt;Hello, &lt;span x-text="username"&gt;Guest&lt;/span&gt;!&lt;/h1&gt;
+&lt;input type="text" x-model="username" placeholder="Enter your name"&gt;
+&lt;button id="myBtn"&gt;Show OS Info&lt;/button&gt;
+
+&lt;lua&gt;
+  -- Bind the 'username' variable to the HTML
+  xhtml:bind('username', 'Developer')
+
+  -- Add a click event to the button
+  local my_button = xhtml.dom.select('#myBtn')
+  my_button:addEventListener('click', function()
+    xhtml.os.info()
+      :then(function(info)
+        local info_str = 'Platform: ' .. info.platform .. ', CPUs: ' .. info.cpus
+        xhtml.os.notify('Your OS Info', info_str)
+      end)
+  end)
+&lt;/lua&gt;</pre>
+            <h3>3. Run the Dev Server</h3>
+            <pre># See your reactive app in action
+xhtml dev</pre>
+        </section>
+
+        <section id="packages">
+            <h2>Package Authoring</h2>
+            <p>To create a package that others can use, structure your files in a new git repository.</p>
+            <pre>
+/my-awesome-package
+|-- package.json       # Standard npm package.json
+|-- main.lua           # The entry point of your package
+|-- /src
+    |-- module1.lua
+    |-- module2.lua
+            </pre>
+            <p>Users can then install it using `xhtml install &lt;your-git-repo-url&gt;`.</p>
+        </section>
+
+    </main>
+</body>
+
+<lua>
+  -- This code powers the live demo on this page
+  xhtml:bind('name', 'World')
+
+  local notify_button = xhtml.dom.select('#notifyBtn')
+  notify_button:addEventListener('click', function()
+    local user_name = xhtml.vars.name
+    if user_name == '' or user_name == 'World' then
+        user_name = 'Anonymous'
+    end
+    xhtml.os.notify('Hello from the Demo!', 'Nice to meet you, ' .. user_name .. '!')
+  end)
+</lua>
+
+</html>
